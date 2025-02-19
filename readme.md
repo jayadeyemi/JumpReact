@@ -1,4 +1,4 @@
-# AWS Web Application with Terraform
+# My Protfolio Web Application with Terraform
 
 This project demonstrates a two‑page AWS web application. It consists of a static landing page and an interactive data visualization page that fetches dynamic data from an AWS Lambda function via API Gateway. The entire infrastructure is provisioned using Terraform, ensuring a repeatable, manageable, and scalable deployment process.
 
