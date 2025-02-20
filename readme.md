@@ -13,7 +13,8 @@ This project demonstrates a two‑page AWS web application. It consists of a sta
   - Terraform for provisioning and managing AWS resources
 - **Programming Languages:**
   - Python for AWS Lambda function code
-  - HTML, CSS, and JavaScript for the web application
+  - HTML, CSS for the web application
+  - JavaScript for the interactive page
 - **Development Tools:**
   - Visual Studio Code for development
   - Git for version control
@@ -30,19 +31,14 @@ This project demonstrates a two‑page AWS web application. It consists of a sta
   - AWS CloudWatch for monitoring and logging Lambda function execution
 
 ## Website Architecture Overview
-- **Page 1: Static Website:**  
+- **Landing Page: Static Website:**  
   A static landing page hosted on Amazon S3. It is served via Amazon CloudFront, and the domain is managed using Amazon Route 53. The static page includes HTML, CSS, and images.
   It is publicly accessible and serves as the entry point for users.
 
-- **Page 2: Interactive Visualization:**  
-  A single-page application (SPA) that fetches dynamic data from an AWS Lambda function. The SPA is hosted on Amazon S3 and served via Amazon CloudFront. It uses JavaScript to make API calls to the backend and render visualizations based on the fetched data. The Lambda function processes or retrieves data and returns it to the SPA. The SPA is designed to be interactive and responsive, providing users with a seamless experience.
-  The SPA is hosted on Amazon S3 and served via Amazon CloudFront. It uses JavaScript to make API calls to the backend and render visualizations based on the fetched data. The Lambda function processes or retrieves data and returns it to the SPA.
-  The SPA is designed to be interactive and responsive, providing users with a seamless experience.
-
-- **Backend Processing:**  
-  The backend consists of an AWS Lambda function, an API Gateway, and an IAM role. The Lambda function is responsible for processing or fetching dynamic data. It is triggered by HTTP requests from the SPA and communicates with other AWS services as needed. The API Gateway exposes the Lambda function as a RESTful API, allowing the SPA to interact with it securely. The IAM role associated with the Lambda function grants it the necessary permissions to access AWS resources, such as S3 buckets or DynamoDB tables.
-- **Infrastructure Management:**
-  The entire infrastructure is managed using Terraform, which allows for easy provisioning, updating, and versioning of AWS resources. Terraform configurations define the S3 buckets, CloudFront distributions, API Gateway endpoints, Lambda functions, IAM roles, and Route 53 records. This ensures that the infrastructure can be easily reproduced or modified as needed.
+- **Visualization Project Page: Interactive Visualization:**  
+  A single-page application (SPA) that fetches dynamic data from an AWS Lambda function. The SPA is hosted on Amazon S3 and served via Amazon CloudFront. It uses JavaScript to make API calls to the backend and render visualizations based on the fetched data. 
+  A Lambda function runs every night at 3:00AM, and processes data from S3 and returns it to S3 in a desired format. 
+  The SPA is hosted on Amazon S3 and served via Amazon CloudFront. It uses JavaScript to make API calls to the backend and render visualizations based on the fetched data.
 
 ## Directory Structure
 The project is organized into several directories, each serving a specific purpose. Below is a high-level overview of the directory structure:
@@ -137,6 +133,7 @@ JumpReact/
   Located in `app/interactive/`, this folder contains the interactive visualization page (HTML, CSS, JavaScript). It fetches data from the AWS Lambda function via API Gateway. The JavaScript code handles API calls and data rendering.
 - **Assets:**
   The `app/static/` folder contains static assets such as images and stylesheets used in the landing page. The `app/interactive/` folder contains the interactive page's HTML, CSS, and JavaScript files. The JavaScript code handles API calls and data rendering.
+
 - **Lambda Function:**
   The `lambda/` folder contains the AWS Lambda function code and its dependencies. The Lambda function is responsible for processing of dynamic data. It is a scheduled function that runs daily and fetches data from an external API. The function is triggered by an API Gateway endpoint, which allows the interactive page to make HTTP requests to it. The Lambda function is written in Python and uses the `requests` library to make HTTP requests to the external API. The function processes the data and returns it in a format suitable for the interactive page.
 
@@ -192,6 +189,7 @@ JumpReact/
 ## Deployment Process
 - **Terraform:**  
   Terrraform deploys the infrastructure, including S3 buckets, CloudFront distributions, API Gateway endpoints, Lambda functions, IAM roles, and Route 53 records. The `terraform/` directory contains all the necessary configurations to provision the AWS resources.
+  
 - **Landing Page: Static Content**  
   Your static and interactive pages are uploaded to Amazon S3. CloudFront serves these pages globally, while Route 53 routes DNS traffic to CloudFront.
 
